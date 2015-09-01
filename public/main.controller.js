@@ -6,10 +6,15 @@ app.config(function($stateProvider) {
 		templateUrl: '/main.html',
 		controller: 'MainController'
 			// RESOLVE!
-	})
-})
+	});
+});
 
-app.controller('MainController', function($scope) {
+app.controller('MainController', function($scope, User, Post) {
+		Post.findAll().then(function (results){
+			console.log('r: ', results)
+			$scope.allPosts = results;
+		});
+	
 
  	/*
 		TODOS: 

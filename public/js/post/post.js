@@ -8,26 +8,46 @@ app.config(function($stateProvider) {
 		resolve: {
 			users: function(User){
 				// GET - > '/api/users'
-				return User.findAll()
+				return User.findAll();
 			}
 		}
-	})
+	});
 });
 
 // add necessary dependencies 
-app.controller('PostCtrl', function() {
+app.controller('PostCtrl', function($state, Post, $scope) {
+	function findPost () {
+		Post.find($state.params.postId).then(function(results) {
+			$scope.post = results;
+		}).then(null, function (error) {
+			console.log(error);
+		});
+	}
+	findPost();
+
+	function destroyPost () {
+		Post.destroy($scope.post._id).then(function(result) {
+			alert("destroyed");
+		}).then(function () {
+			$state.go("main");
+		}).then(null, function(error) {
+			console.log(error);
+		});
+	}
 
 
-	/* 1. FIND POST
-		use state params to retrieve the post id and attach post object to scope 
-		on controller load 
-	*/
+	function editPost () {
+		
+	}
 
 	/*
 		2. DELETE POST 
 		create a function that destroys the post, adds an alert that the post has been 
 		successfully deleted, and redirects to the main state. 
 	*/
+
+
+
 
 	/*
 		3. EDIT POST 

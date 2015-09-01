@@ -5,12 +5,19 @@ app.config(function($stateProvider) {
 		url: '/create/:userId',
 		templateUrl: 'js/create/create.html',
 		controller: 'CreateCtrl' 
+		// resolve: {
+		// 	author: function () {
+		// 		User.find($state.params.userId).then(function (theAuthor) {
+		// 			return theAuthor;
+		// 		});
+		// 	}
+		// }
 		/*
 				add a resolve block that has an author function which 
-				users $stateParams to retrieve the author object
+				uses $stateParams to retrieve the author object
 		*/
-	})
-})
+	});
+});
 
 // add necessary dependencies here 
 app.controller('CreateCtrl', function($scope) {
@@ -19,7 +26,7 @@ app.controller('CreateCtrl', function($scope) {
 
 	$scope.preview = function() {
 		$scope.previewTrue = !$scope.previewTrue;
-	}
+	};
 
 	/*
 
@@ -31,4 +38,4 @@ app.controller('CreateCtrl', function($scope) {
 
 	*/
 	
-}) 
+}) ;

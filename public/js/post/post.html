@@ -3,19 +3,20 @@
 <div class="col-lg-12">
 
 	<div class="postTitle">
-    <!-- display the post title -->
+    {{post.title}}
 		<h2></h2>
     <!-- add functionality that makes this Edit button work -->
-		<button type="button" class="btn btn-primary">Edit</button>
+		<button ng-click="editPost()" type="button" class="btn btn-primary">Edit</button>
 
     <!-- add functionality that makes this Delete button work -->
-		<button type="button" class="btn btn-primary btn-danger">Delete</button>
+		<button ng-click="destroyPost()" type="button" class="btn btn-primary btn-danger">Delete</button>
 	</div>
 
   <!-- display the user's name by accessing the user object embedded in the post -->
+  		{{post.author.username}}
 
   <!-- display the post body -->
-	<p></p>
+	<p>{{post.body}}</p>
 
 	<a ui-sref="main">Back to All Posts</a>
 
