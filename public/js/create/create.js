@@ -5,13 +5,15 @@ app.config(function($stateProvider) {
 		url: '/create/:userId',
 		templateUrl: 'js/create/create.html',
 		controller: 'CreateCtrl' ,
-		// resolve: {
-		// 	author: function () {
-		// 		User.find($state.params.userId).then(function (theAuthor) {
-		// 			return theAuthor;
-		// 		});
-		// 	}
-		// }
+		resolve: {
+			author: function (User, $state) {
+				console.log($state.params);
+				User.find($state.params.userId).then(function (theAuthor) {
+					console.log(theAuthor);
+					return theAuthor;
+				});
+			}
+		}
 		/*
 				add a resolve block that has an author function which 
 				uses $stateParams to retrieve the author object
@@ -20,8 +22,9 @@ app.config(function($stateProvider) {
 });
 
 // add necessary dependencies here 
-app.controller('CreateCtrl', function($scope, author) {
+app.controller('CreateCtrl', function($scope, author, Post) {
 
+	$scope.post = {};
 	$scope.previewTrue = false;
 
 	$scope.preview = function() {
@@ -32,9 +35,10 @@ app.controller('CreateCtrl', function($scope, author) {
   	$scope.post.title = $scope.newPost.title;
   	$scope.post.body = $scope.newPost.body;
   	$scope.post.author = author;
-  	// Post.create($scope.post).then(function (result) {
-  	// 	$state.go("main");
-  	// });
+  	console.log(author);
+  	Post.create($scope.post).then(function (result) {
+  		$state.go("main");
+  	});
   }
 
 
